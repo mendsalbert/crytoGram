@@ -2,8 +2,8 @@
 
 ## This blockchain instagram will allow users to tip authors of a post with some amount of cryptocurrency
 
-![Image of Product](/images/CryptoGram-1.png)
-![Image of Product](/images/CryptoGram.png)
+![Image of Product](/cryptogram/public/images/CryptoGram-1.png)
+![Image of Product](/cryptogram/public/images/CryptoGram-1.png)
 
 CryptoGram is a DDap version of instagram that runs on a blockchain network. User will be able to recieve cryptos on their posts.
 
