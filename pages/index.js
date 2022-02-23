@@ -53,6 +53,12 @@ const Home = () => {
       const imageCount = await decentralGram.methods.imageCount().call()
       setImageCount(imageCount)
       setIsLoading(false)
+
+      //load images
+      for (var i = 1; i <= imageCount; i++) {
+        const image = await decentralGram.methods.images(i).call()
+        setImages([...images, image])
+      }
     } else {
       window.alert('Decentragram contract not deployed to detected network')
     }
@@ -76,8 +82,18 @@ const Home = () => {
         console.log(error)
         return
       }
+
+      setIsLoading(true)
+      decentralGram.methods
+        .uploadImage(result[0].hash, description)
+        .send({ from: account })
+        .on('transactionHash', (hash) => {
+          setIsLoading(false)
+        })
     })
   }
+
+  console.log(images)
 
   useEffect(() => {
     loadWeb3()
@@ -92,7 +108,7 @@ const Home = () => {
       <Layout>
         <Nav account={account} />
         <Upload captureFile={captureFile} uploadImage={uploadImage} />
-        <Timeline />
+        <Timeline images={images} />
       </Layout>
     )
   }
