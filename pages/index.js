@@ -55,9 +55,9 @@ const Home = () => {
       setIsLoading(false)
 
       //load images
-      for (var i = 1; i <= imageCount; i++) {
+      for (let i = 1; i <= imageCount; i++) {
         const image = await decentralGram.methods.images(i).call()
-        setImages([...images, image])
+        setImages((prevState) => [...prevState, image])
       }
     } else {
       window.alert('Decentragram contract not deployed to detected network')
@@ -93,7 +93,15 @@ const Home = () => {
     })
   }
 
-  console.log(images)
+  const tipImageOwner = async (id, tipAmount) => {
+    setIsLoading(true)
+    decentralGram.methods
+      .tipImageOwner(id)
+      .send({ from: account, value: tipAmount })
+      .on('transactionHash', (hash) => {
+        setIsLoading(false)
+      })
+  }
 
   useEffect(() => {
     loadWeb3()
@@ -108,7 +116,7 @@ const Home = () => {
       <Layout>
         <Nav account={account} />
         <Upload captureFile={captureFile} uploadImage={uploadImage} />
-        <Timeline images={images} />
+        <Timeline images={images} tipImageOwner={tipImageOwner} />
       </Layout>
     )
   }

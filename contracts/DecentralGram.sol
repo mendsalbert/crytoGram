@@ -41,8 +41,8 @@ contract DecentralGram {
 
         require(msg.sender != address(0x0));
         imageCount++;
-        images[imageCount] = Image(imageCount,_imageHash,_description, 0 , address(msg.sender));
-        emit ImageCreated(imageCount,_imageHash,_description, 0 , address(msg.sender));
+        images[imageCount] = Image(imageCount,_imageHash,_description, 0 , payable(address(msg.sender)));
+        emit ImageCreated(imageCount,_imageHash,_description, 0 , payable(address(msg.sender)));
     }
 
     //tip an image

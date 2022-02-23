@@ -2,9 +2,11 @@ import React from 'react'
 import { CashIcon } from '@heroicons/react/outline'
 import Identicon from 'identicon.js'
 const Timeline = (props) => {
+  console.log(props)
   return (
     <>
       {props.images.map((imgs, idx) => (
+        // <p>{}</p>
         <div className=" mt-7 bg-black font-Montserrat ">
           <div className="flex items-center space-x-1 p-2">
             <img
@@ -42,8 +44,8 @@ const Timeline = (props) => {
                 <div
                   onClick={(event) => {
                     let tipAmount = window.web3.utils.toWei('0.1', 'Ether')
-                    console.log(event.target.name, tipAmount)
-                    props.tipImageOwner(event.target.name, tipAmount)
+                    console.log(tipAmount)
+                    props.tipImageOwner(imgs.id, tipAmount)
                   }}
                   className="mt-4 cursor-pointer rounded-full bg-green-500 px-8 py-2 text-center text-xl text-white "
                 >
