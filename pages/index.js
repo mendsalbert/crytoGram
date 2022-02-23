@@ -59,6 +59,8 @@ const Home = () => {
         const image = await decentralGram.methods.images(i).call()
         setImages((prevState) => [...prevState, image])
       }
+
+      // setImages(images.sort((a, b) => b.tipAmount - a.tipAmount))
     } else {
       window.alert('Decentragram contract not deployed to detected network')
     }
