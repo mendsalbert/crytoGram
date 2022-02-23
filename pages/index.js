@@ -8,9 +8,6 @@ import Skeleton from '../components/Skeleton'
 import Timeline from '../components/Timeline'
 import Upload from '../components/Upload'
 import DecentralGram from '../src/abis/DecentralGram.json'
-// import { create } from "ipfs-http-client";
-// const ipfs = create("https://ipfs.infura.io:5001/api/v0");
-const ipfsClient = require('ipfs-http-client')
 
 const Home = () => {
   const [account, setAccount] = useState('0x0')
@@ -19,6 +16,14 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [imageCount, setImageCount] = useState(0)
   const [buffer, setBuffer] = useState('')
+
+  const ipfsClient = require('ipfs-http-client')
+  const ipfs = ipfsClient({
+    host: 'ipfs.infura.io',
+    port: 5001,
+    protocol: 'https',
+  })
+
   const loadWeb3 = async () => {
     if (window.ethereuem) {
       window.web3 = new Web3(window.ethereum)
@@ -62,16 +67,17 @@ const Home = () => {
     }
   }
 
-  // const uploadImage = (description) => {
-  //   console.log("submitting file to ipfs...");
-  //   // ipfs.add(buffer, (error, result) => {
-  //   //   console.log("Ipfs result", result);
-  //   //   if (error) {
-  //   //     console.log(error);
-  //   //     return;
-  //   //   }
-  //   // });
-  // };
+  const uploadImage = (description) => {
+    console.log('submitting file to ipfs...')
+    console.log(description)
+    ipfs.add(buffer, (error, result) => {
+      console.log('Ipfs result', result)
+      if (error) {
+        console.log(error)
+        return
+      }
+    })
+  }
 
   useEffect(() => {
     loadWeb3()
@@ -85,7 +91,7 @@ const Home = () => {
     return (
       <Layout>
         <Nav account={account} />
-        <Upload captureFile={captureFile} />
+        <Upload captureFile={captureFile} uploadImage={uploadImage} />
         <Timeline />
       </Layout>
     )

@@ -4,7 +4,7 @@ import { GlobeAltIcon } from '@heroicons/react/outline'
 const Layout = (props) => {
   return (
     <>
-      {/* <Head>
+      <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,7 +18,7 @@ const Layout = (props) => {
           href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600&family=Montserrat:wght@200;300&family=Secular+One&display=swap"
           rel="stylesheet"
         />
-      </Head> */}
+      </Head>
       <div className="flex h-full w-full flex-col items-center bg-background-image  bg-cover  ">
         <div className="mt-20 w-11/12 bg-[#161616] p-6 md:w-7/12">
           {props.children}
